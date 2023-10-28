@@ -1,0 +1,34 @@
+---
+tenants:
+  - name: ACME
+    mac_vrf_vni_base: 10000
+    vrfs:
+      - name: VRF_A
+        vrf_vni: 10
+        svis:
+          - id: 10
+            # SVI Description
+            name: DMZ
+            enabled: true
+            ip_address_virtual: 10.1.10.1/24
+          - id: 20
+            # SVI Description
+            name: DMZ
+            enabled: true
+            ip_address_virtual: 10.1.20.1/24
+        # l3_interfaces:
+        #   - interfaces: [Ethernet8]
+        #     ip_addresses: [192.168.109.0/31]
+        #     nodes: [borderleaf1]
+        #     enabled: True 
+        #   - interfaces: [Ethernet8]
+        #     ip_addresses: [192.168.109.2/31]
+        #     nodes: [borderleaf2]
+        #     enabled: True 
+        # bgp_peers:
+        #   - ip_address: 192.168.109.1
+        #     remote_as: 65300
+        #     nodes: [borderleaf1]   
+        #   - ip_address: 192.168.109.1
+        #     remote_as: 65400
+        #     nodes: [borderleaf2]
