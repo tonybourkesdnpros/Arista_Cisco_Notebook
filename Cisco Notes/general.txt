@@ -10,4 +10,52 @@ nv overlay evpn
 
 
 
-fabric forwarding anycast-gateway-mac
+fabric forwarding anycast-gateway-mac 001c.7300.0099
+
+VRF
+
+vrf context VRF_A
+  vni 10
+  rd auto
+  address-family ipv4 unicast
+  route-target both auto
+  route-target both auto evpn
+
+vlan 1010
+  vn-segement 10
+  
+int vlan 1010
+  no shut
+  vrf member VRF_A
+  ip forward
+
+router bgp 65300
+  vrf VRF_A
+    address-family ipv4 unicast
+      advertise l2vpn evpn
+
+L2 Segments
+
+vlan 1010
+  vn-segment 10
+vlan 10
+  vn-segment 10010
+
+interface nve1
+  member vni 10010
+    suppress-arp
+    ingress-replication protocol bgp
+    member vni 10 associate-vrf  
+
+interface vlan 10
+  no shut
+  vrf member VRF_A
+  ip address 10.1.10.1/24
+  fabric forwarding mode anycast-gateway
+
+evpn 
+  vni 10010 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+
