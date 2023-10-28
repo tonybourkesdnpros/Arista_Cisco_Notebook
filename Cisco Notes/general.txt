@@ -1,0 +1,13 @@
+Features to run
+
+
+feature bgp
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+
+
+
+fabric forwarding anycast-gateway-mac
